@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.devmasterteam.tasks.R
@@ -57,6 +58,19 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list)
             binding.spinnerPriority.adapter = adapter
         }
+
+        viewModel.taskSave.observe(this) {
+            if (it.status()){
+                toast(getString(R.string.task_created))
+                finish()
+            } else {
+                toast(it.message())
+            }
+        }
+    }
+
+    private fun toast(string: String) {
+        Toast.makeText(applicationContext, string, Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View) {
@@ -74,7 +88,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             this.complete = binding.checkComplete.isChecked
             this.dueDate = binding.buttonDate.text.toString()
             val index = binding.spinnerPriority.selectedItemPosition
-            this.priority = listPriority[index].id
+            this.priorityId = listPriority[index].id
         }
 
         viewModel.save(task)

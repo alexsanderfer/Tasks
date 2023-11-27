@@ -16,10 +16,38 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TaskRepository (val context: Context): BaseRepository() {
+class TaskRepository(val context: Context) : BaseRepository() {
     private val remote = RetrofitClient.getService(TaskService::class.java)
+
+    private fun extracted(call: Call<List<TaskModel>>, listener: APIListener<List<TaskModel>>) {
+        call.enqueue(object : Callback<List<TaskModel>> {
+            override fun onResponse(call: Call<List<TaskModel>>, response: Response<List<TaskModel>>) {
+                handleResponse(response, listener)
+            }
+
+            override fun onFailure(call: Call<List<TaskModel>>, t: Throwable) {
+                listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
+            }
+        })
+    }
+
+    fun list(listener: APIListener<List<TaskModel>>) {
+        val call = remote.list()
+        extracted(call, listener)
+    }
+
+    fun listNext7Days(listener: APIListener<List<TaskModel>>) {
+        val call = remote.listNext7Days()
+        extracted(call, listener)
+    }
+
+    fun listOverdue(listener: APIListener<List<TaskModel>>) {
+        val call = remote.listOverdue()
+        extracted(call, listener)
+    }
+
     fun create(task: TaskModel, listener: APIListener<Boolean>) {
-        val call = remote.create(task.priority, task.description, task.dueDate, task.complete)
+        val call = remote.create(task.priorityId, task.description, task.dueDate, task.complete)
         call.enqueue(object : Callback<Boolean> {
             override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
                 handleResponse(response, listener)

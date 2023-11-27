@@ -9,9 +9,9 @@ package com.devmasterteam.tasks.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.devmasterteam.tasks.databinding.RowTaskListBinding
 import com.devmasterteam.tasks.service.listener.TaskListener
 import com.devmasterteam.tasks.service.model.TaskModel
-import com.devmasterteam.tasks.databinding.RowTaskListBinding
 import com.devmasterteam.tasks.view.viewholder.TaskViewHolder
 
 class TaskAdapter : RecyclerView.Adapter<TaskViewHolder>() {
@@ -31,6 +31,11 @@ class TaskAdapter : RecyclerView.Adapter<TaskViewHolder>() {
 
     override fun getItemCount(): Int {
         return listTasks.count()
+    }
+
+    fun updateTasks(list: List<TaskModel>) {
+        listTasks = list
+        notifyDataSetChanged()
     }
 
     fun attachListener(taskListener: TaskListener) {
