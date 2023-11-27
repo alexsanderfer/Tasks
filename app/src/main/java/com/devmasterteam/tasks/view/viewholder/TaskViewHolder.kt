@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/25. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/27. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -23,7 +23,7 @@ class TaskViewHolder(private val itemBinding: RowTaskListBinding, val listener: 
     fun bindData(task: TaskModel) {
 
         itemBinding.textDescription.text = task.description
-        itemBinding.textPriority.text = task.priorityId.toString()
+        itemBinding.textPriority.text = task.priorityDescription
 
         val date = SimpleDateFormat("yyyy-MM-dd").parse(task.dueDate)
         itemBinding.textDueDate.text = SimpleDateFormat("dd/MM/yyyy").format(date)

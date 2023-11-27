@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/25. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/27. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -24,5 +24,7 @@ class TaskModel {
 
     @SerializedName("Complete")
     var complete: Boolean = false
+
+    var priorityDescription: String = ""
 
 }

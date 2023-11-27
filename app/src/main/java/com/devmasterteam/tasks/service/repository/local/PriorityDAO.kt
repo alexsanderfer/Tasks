@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/26. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/27. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -18,6 +18,9 @@ interface PriorityDAO {
 
     @Query("SELECT * FROM Priority")
     fun list(): List<PriorityModel>
+
+    @Query("SELECT description FROM Priority WHERE id = :id")
+    fun getDescription(id: Int): String
 
     @Query("DELETE FROM Priority")
     fun clear()
