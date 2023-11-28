@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/26. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/28. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -51,7 +51,7 @@ interface TaskService {
     @FormUrlEncoded
     fun undo(@Field("Id") id: Int): Call<Boolean>
 
-    @DELETE("Task")
+    @HTTP(method = "DELETE", path = "Task", hasBody = true)
     @FormUrlEncoded
     fun delete(@Field("Id") id: Int): Call<Boolean>
 

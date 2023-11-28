@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/26. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/28. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -19,6 +19,7 @@ import retrofit2.Response
 class TaskRepository(val context: Context) : BaseRepository() {
     private val remote = RetrofitClient.getService(TaskService::class.java)
 
+    // Função extraída para TaskModel
     private fun extracted(call: Call<List<TaskModel>>, listener: APIListener<List<TaskModel>>) {
         call.enqueue(object : Callback<List<TaskModel>> {
             override fun onResponse(call: Call<List<TaskModel>>, response: Response<List<TaskModel>>) {
@@ -26,6 +27,19 @@ class TaskRepository(val context: Context) : BaseRepository() {
             }
 
             override fun onFailure(call: Call<List<TaskModel>>, t: Throwable) {
+                listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
+            }
+        })
+    }
+
+    // Função extraída para Boolean - create & delete methods.
+    private fun extracted2(call: Call<Boolean>, listener: APIListener<Boolean>) {
+        call.enqueue(object : Callback<Boolean> {
+            override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                handleResponse(response, listener)
+            }
+
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
                 listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
             }
         })
@@ -48,14 +62,11 @@ class TaskRepository(val context: Context) : BaseRepository() {
 
     fun create(task: TaskModel, listener: APIListener<Boolean>) {
         val call = remote.create(task.priorityId, task.description, task.dueDate, task.complete)
-        call.enqueue(object : Callback<Boolean> {
-            override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
-                handleResponse(response, listener)
-            }
+        extracted2(call, listener)
+    }
 
-            override fun onFailure(call: Call<Boolean>, t: Throwable) {
-                listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
-            }
-        })
+    fun delete(id: Int, listener: APIListener<Boolean>) {
+        val call = remote.delete(id)
+        extracted2(call, listener)
     }
 }
