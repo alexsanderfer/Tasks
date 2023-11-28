@@ -28,7 +28,7 @@ class AllTasksFragment : Fragment() {
     private val adapter = TaskAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, b: Bundle?): View {
-        viewModel = ViewModelProvider(this).get(TaskListViewModel::class.java)
+        viewModel = ViewModelProvider(this)[TaskListViewModel::class.java]
         _binding = FragmentAllTasksBinding.inflate(inflater, container, false)
 
         binding.recyclerAllTasks.layoutManager = LinearLayoutManager(context)
@@ -43,9 +43,11 @@ class AllTasksFragment : Fragment() {
             }
 
             override fun onCompleteClick(id: Int) {
+                viewModel.status(id, true)
             }
 
             override fun onUndoClick(id: Int) {
+                viewModel.status(id, false)
             }
         }
         adapter.attachListener(listener)
@@ -72,6 +74,12 @@ class AllTasksFragment : Fragment() {
         }
 
         viewModel.delete.observe(viewLifecycleOwner) {
+            if (!it.status()) {
+                Toast.makeText(context, it.message(), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.status.observe(viewLifecycleOwner) {
             if (!it.status()) {
                 Toast.makeText(context, it.message(), Toast.LENGTH_SHORT).show()
             }
