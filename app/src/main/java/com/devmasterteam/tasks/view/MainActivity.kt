@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/25. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/29. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -9,26 +9,29 @@ package com.devmasterteam.tasks.view
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.databinding.ActivityMainBinding
+import com.devmasterteam.tasks.viewmodel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
@@ -61,6 +64,18 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navView.setNavigationItemSelectedListener {
+            if (it.itemId == R.id.nav_logout) {
+                viewModel.lougout()
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                finish()
+            } else {
+                NavigationUI.onNavDestinationSelected(it, navController)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            true
+        }
     }
 
     private fun observe() {
