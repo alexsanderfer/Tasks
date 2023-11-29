@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/28. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/29. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -7,6 +7,7 @@
 package com.devmasterteam.tasks.service.repository
 
 import android.content.Context
+import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.service.listener.APIListener
 import com.devmasterteam.tasks.service.model.PriorityModel
 import com.devmasterteam.tasks.service.repository.local.TaskDatabase
@@ -46,6 +47,10 @@ class PriorityRepository(context: Context) : BaseRepository(context) {
     }
 
     fun list(listener: APIListener<List<PriorityModel>>) {
+        if (!isConnectionAvaiable()) {
+            listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
+            return
+        }
         executeCall(remote.list(), listener)
     }
 
