@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/25. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/29. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -10,6 +10,7 @@ import com.devmasterteam.tasks.service.model.PersonModel
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.HTTP
 import retrofit2.http.POST
 
 interface PersonService {
@@ -21,7 +22,8 @@ interface PersonService {
         @Field("password") password: String
     ): Call<PersonModel>
 
-    @POST("Authentication/Create")
+    @HTTP(method = "POST", path = "Authentication/Create", hasBody = true)
+    @FormUrlEncoded
     fun create(
         @Field("name") name: String,
         @Field("email") email: String,

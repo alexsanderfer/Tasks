@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/25. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/29. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -51,6 +51,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         if (v.id == R.id.button_login) {
             handleLogin()
+        } else if (v.id == R.id.text_register) {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 

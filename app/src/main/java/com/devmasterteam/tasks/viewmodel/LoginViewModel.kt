@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/25. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/29. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -29,7 +29,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _login = MutableLiveData<ValidationModel>()
     val login: LiveData<ValidationModel> = _login
-
 
     private val _loggedUser = MutableLiveData<Boolean>()
     val loggedUser: LiveData<Boolean> = _loggedUser
@@ -79,7 +78,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 }
 
                 override fun onFailure(message: String) {
-                    val s = ""
                 }
 
             })
