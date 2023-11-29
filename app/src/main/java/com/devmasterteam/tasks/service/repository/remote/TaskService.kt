@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/28. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/29. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -11,7 +11,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface TaskService {
-
     @GET("Task")
     fun list(): Call<List<TaskModel>>
 

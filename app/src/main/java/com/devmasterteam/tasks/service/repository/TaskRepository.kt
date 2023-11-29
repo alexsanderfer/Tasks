@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023. Created by Alexsander at 11/28. All rights reserved.
+ * Copyright (c) 2023. Created by Alexsander at 11/29. All rights reserved.
  * GitHub: https://github.com/alexsanderfer/
  * Portfolio: https://alexsanderfer.netlify.app/
  */
@@ -19,6 +19,10 @@ class TaskRepository(context: Context) : BaseRepository(context) {
         executeCall(remote.list(), listener)
     }
 
+    fun load(id: Int, listener: APIListener<TaskModel>) {
+        executeCall(remote.load(id), listener)
+    }
+
     fun listNext7Days(listener: APIListener<List<TaskModel>>) {
         executeCall(remote.listNext7Days(), listener)
     }
@@ -35,6 +39,10 @@ class TaskRepository(context: Context) : BaseRepository(context) {
         )
     }
 
+    fun update(task: TaskModel, listener: APIListener<Boolean>) {
+        executeCall(remote.update(task.id, task.priorityId, task.description, task.dueDate, task.complete), listener)
+    }
+
     fun delete(id: Int, listener: APIListener<Boolean>) {
         executeCall(remote.delete(id), listener)
     }
@@ -46,5 +54,4 @@ class TaskRepository(context: Context) : BaseRepository(context) {
     fun undo(id: Int, listener: APIListener<Boolean>) {
         executeCall(remote.undo(id), listener)
     }
-
 }
