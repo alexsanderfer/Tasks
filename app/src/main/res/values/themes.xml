@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2023. Created by Alexsander at 11/18. All rights reserved.
+  ~ Copyright (c) 2023. Created by Alexsander at 11/30. All rights reserved.
   ~ GitHub: https://github.com/alexsanderfer/
   ~ Portfolio: https://alexsanderfer.netlify.app/
   -->
@@ -28,4 +28,22 @@
     <style name="Theme.Tasks.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Tasks.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="DefaultButton">
+        <!-- DefaultColo Button -->
+        <item name="android:backgroundTint">@color/pink</item>
+        <item name="android:paddingStart">64dp</item>
+        <item name="android:paddingEnd">64dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="EditTextWhite">
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:drawableTint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>

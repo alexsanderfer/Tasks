@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2023. Created by Alexsander at 11/18. All rights reserved.
+  ~ Copyright (c) 2023. Created by Alexsander at 11/30. All rights reserved.
   ~ GitHub: https://github.com/alexsanderfer/
   ~ Portfolio: https://alexsanderfer.netlify.app/
   -->
@@ -30,6 +30,8 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
+        android:backgroundTint="@color/pink"
+        android:tint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
