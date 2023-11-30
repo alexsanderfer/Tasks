@@ -29,8 +29,8 @@
 
     <style name="Theme.Tasks.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- DefaultColor Button -->
     <style name="DefaultButton">
-        <!-- DefaultColo Button -->
         <item name="android:backgroundTint">@color/pink</item>
         <item name="android:paddingStart">64dp</item>
         <item name="android:paddingEnd">64dp</item>
@@ -38,6 +38,7 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
+    <!-- DefaultColor Text -->
     <style name="EditTextWhite">
         <item name="android:drawablePadding">8dp</item>
         <item name="android:drawableTint">@color/white</item>
@@ -46,4 +47,15 @@
         <item name="android:backgroundTint">@color/white</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <style name="ViewDivider">
+        <item name="android:background">@color/grey_500</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+
 </resources>
