@@ -29,7 +29,7 @@ Before starting to develop or test this application, make sure you have the foll
 
 1. Clone this repository on your local machine.
     ```bash
-    git clone https://github.com/your-username/repository-name.git
+    git clone [https://github.com/alexsanderfer/Task.git](https://github.com/alexsanderfer/Tasks.git)
     ```
 
 2. Open the project in IntelliJ IDEA Ultimate.
