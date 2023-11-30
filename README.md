@@ -46,7 +46,7 @@ Contributions are welcome! If you encounter issues, bugs, or have suggestions fo
 
 ## Author
 
-Alexsander F. Gouevia
+Alexsander F. Gouveia
 
 ---
 
