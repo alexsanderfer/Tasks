@@ -4,12 +4,6 @@
  * Portfolio: https://alexsanderfer.netlify.app/
  */
 
-/**
-"name": "Alexsander",
-"token": "4b2MypHlWVm5BVPZ9FlvYwZCLx5GW8uwB0YvgeJUEIzziIRh4QIVVQ==",
-"personKey": "1LmOSHuOkAMGQi8eRlvLsAdGL4HiVBCM84iEYeECFVU="
- **/
-
 package com.devmasterteam.tasks.view
 
 import android.content.Intent
@@ -17,12 +11,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.databinding.ActivityLoginBinding
 import com.devmasterteam.tasks.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
+
+    /** Mostrar autenticação biométrica se o usuário já estiver logado.
+     * Em caso de sucesso → Navegação normal
+     * Em caso de falha → manter na LoginActivity.
+     * Em caso de não ter dados de autenticação salvos, não mostrar biometria.
+     **/
 
     private lateinit var viewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
@@ -43,7 +45,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding.textRegister.setOnClickListener(this)
 
         // Verifica se o usuário já está logado
-        viewModel.verifyLoggedUser()
+        viewModel.verifyAuthentication()
 
         // Observadores
         observe()
@@ -61,8 +63,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val email = binding.editEmail.text.toString()
         val password = binding.editPassword.text.toString()
         viewModel.doLogin(email, password)
-
     }
+
 
     private fun observe() {
         viewModel.login.observe(this) {
@@ -73,11 +75,32 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(applicationContext, it.message(), Toast.LENGTH_SHORT).show()
             }
         }
+
         viewModel.loggedUser.observe(this) {
             if (it) {
+                handleBiometricAuthentication()
+            }
+        }
+
+    }
+
+    private fun handleBiometricAuthentication() {
+        val executor = ContextCompat.getMainExecutor(this)
+        val bio = BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             }
-        }
+        })
+
+        val info = BiometricPrompt.PromptInfo.Builder()
+            .setTitle(getString(R.string.prompt_confirm_identity))
+            //.setSubtitle("Subtitulo")
+            //.setDescription("Descrição")
+            .setNegativeButtonText(getString(R.string.prompt_cancel))
+            .build()
+
+        bio.authenticate(info)
     }
 }

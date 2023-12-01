@@ -38,5 +38,7 @@
     <string name="expiradas">Expiradas</string>
     <string name="todas_tarefas">Todas as tarefas</string>
     <string name="proximos_7_dias">Próximos 7 dias</string>
+    <string name="prompt_cancel">Cancelar</string>
+    <string name="prompt_confirm_identity">Confirme a sua identidade</string>
 
 </resources>
